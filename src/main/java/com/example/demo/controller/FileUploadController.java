@@ -6,6 +6,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class FileUploadController {
     private String path;
 
     @RequestMapping("/fileUpload")
+    @ResponseBody
     public String fileUpload(@RequestParam("files") MultipartFile[] files) {
         if (files != null & files.length > 0) {
             int count = 0;
