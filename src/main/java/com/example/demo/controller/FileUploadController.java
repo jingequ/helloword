@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -56,6 +58,10 @@ public class FileUploadController {
                 }
                 // 文件保存路径
                 String savePath = path + File.separator + newName;
+                if (new File(savePath).exists()) {
+                    String time = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss:SSS").format(new Date());
+                    savePath = time + path + "_" + File.separator + newName;
+                }
                 // 转存文件
                 file.transferTo(new File(savePath));
                 return true;
@@ -64,5 +70,10 @@ public class FileUploadController {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        String time = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss:SSS").format(new Date());
+        System.out.println(time);
     }
 }
