@@ -29,9 +29,7 @@ public class FileUploadController {
             for (int i = 0; i < files.length; i++) {
                 MultipartFile file = files[i];
                 String name = file.getOriginalFilename();
-                String newName = UUID.randomUUID().toString().replace("-", "");
-                newName = newName + "-" + name;
-                if (saveFile(file, newName)) {
+                if (saveFile(file, name)) {
                     count++;
                 }
             }
@@ -48,7 +46,7 @@ public class FileUploadController {
      * @param file
      * @return
      */
-    private boolean saveFile(MultipartFile file, String newName) {
+    private boolean saveFile(MultipartFile file, String name) {
         // 判断文件是否为空
         if (!file.isEmpty()) {
             try {
@@ -57,10 +55,10 @@ public class FileUploadController {
                     filepath.mkdirs();
                 }
                 // 文件保存路径
-                String savePath = path + File.separator + newName;
+                String savePath = path + File.separator + name;
                 if (new File(savePath).exists()) {
                     String time = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss:SSS").format(new Date());
-                    savePath = time + path + "_" + File.separator + newName;
+                    savePath =  path + File.separator + time + "_" + name;
                 }
                 // 转存文件
                 file.transferTo(new File(savePath));
