@@ -1,3 +1,2 @@
 # helloword
-my hello word
-this is my first github project !
+this is a upload project !
